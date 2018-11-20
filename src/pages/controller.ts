@@ -1,5 +1,6 @@
 import { JsonController, Get, Put, Param, Body, Post, HttpCode } from 'routing-controllers'
-import pagesById, { Page } from './data'
+import pagesById from './entity'
+import Page from './entity'
 
 type PageList = { pages: Page[] }
 
@@ -14,8 +15,8 @@ export default class PageController {
     @Get('/pages/:id')
     getPage(
         @Param('id') id: number
-    ): Page {
-        return pagesById[id]
+    ) {
+        return Page.findOne(id)
     }
 
     @Put('/pages/:id')
