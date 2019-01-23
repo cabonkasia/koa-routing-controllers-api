@@ -21,10 +21,10 @@ export default class PageController {
 
     @Put('/pages/:id')
     async updatePage(
-        @Param('id') id: number,
+        @Param('id') id: string,
         @Body() update: Partial<Page>
     ) {
-        const page = await Page.findOne(id)
+        const page = await Page.findOne(parseInt(id))
         if (!page) throw new NotFoundError('Cannot find page')
         return Page.merge(page, update).save()
     }
